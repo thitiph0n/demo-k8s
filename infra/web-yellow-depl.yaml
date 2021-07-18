@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-yellow-depl
+  namespace: my-web
+  labels:
+    app: web-yellow
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: web-yellow
+  template:
+    metadata:
+      labels:
+        app: web-yellow
+    spec:
+      containers:
+        - name: web-yellow
+          image: thitiph0n/web-yellow
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-yellow-svc
+  namespace: my-web
+spec:
+  selector:
+    app: web-yellow
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+      protocol: TCP

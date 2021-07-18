@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-blue-depl
+  namespace: my-web
+  labels:
+    app: web-blue
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web-blue
+  template:
+    metadata:
+      labels:
+        app: web-blue
+    spec:
+      containers:
+        - name: web-blue
+          image: thitiph0n/web-blue
+          ports:
+            - containerPort: 80
